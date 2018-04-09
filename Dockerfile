@@ -1,5 +1,5 @@
 FROM alpine:latest
-RUN apk add --no-cache build-base python3-dev libffi-dev openssl-dev jq groff && \
+RUN apk add --no-cache build-base python3-dev libffi-dev openssl-dev jq groff libxml2-dev py3-lxml libxslt-dev && \
     python3 -m ensurepip && \
     rm -r /usr/lib/python*/ensurepip && \
     pip3 install --upgrade pip setuptools && \
