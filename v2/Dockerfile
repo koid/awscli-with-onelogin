@@ -8,7 +8,7 @@ RUN apt-get update \
  && rm -rf /var/lib/apt/lists/*
 
 RUN pip install --no-cache-dir --upgrade \
-    pip setuptools onelogin-aws-cli
+    pip onelogin-aws-cli
 
 WORKDIR /tmp
 COPY pgp.key .
