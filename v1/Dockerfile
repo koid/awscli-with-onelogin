@@ -1,10 +1,13 @@
-FROM alpine:latest
-RUN apk add --no-cache build-base python3-dev libffi-dev openssl-dev jq groff libxml2-dev py3-lxml libxslt-dev && \
-    python3 -m ensurepip && \
-    rm -r /usr/lib/python*/ensurepip && \
-    pip3 install --upgrade pip setuptools && \
-    pip3 install aws awscli onelogin onelogin-aws-cli urllib3==1.24.3 && \
-    if [ ! -e /usr/bin/pip ]; then ln -s pip3 /usr/bin/pip ; fi && \
-    if [[ ! -e /usr/bin/python ]]; then ln -sf /usr/bin/python3 /usr/bin/python; fi && \
-    rm -r /root/.cache
+FROM python:3.7-slim
 
+RUN apt-get update \
+ && apt-get install -y \
+    ca-certificates curl jq bash-completion \
+ && apt-get autoremove -y \
+ && apt-get clean \
+ && rm -rf /var/lib/apt/lists/*
+
+RUN pip install --no-cache-dir --upgrade \
+    pip awscli onelogin-aws-cli
+
+WORKDIR /tmp
